@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>Reparaciones</h1>
+
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Descripcion</th>
+				<td>{{ reparacione.descripcion }}</td>
+			</tr>
+			<tr>
+				<th>Fecha</th>
+				<td>{{ reparacione.fecha ? reparacione.fecha|date('Y-m-d') : '' }}</td>
+			</tr>
+			{% set precioTotal = 0 %}
+			{% for pieza in reparacione.getPiezaId() %}
+				{% set precioTotal = precioTotal + pieza.getPrecio() %}
+			{% endfor %}
+			<tr>
+				<th>Precio total</th>
+				<td>
+					{{ precioTotal }}
+					€
+				</td>
+			</tr>
+
+		</tbody>
+	</table>
+
+	<div class="btn-toolbar" role="toolbar" aria-label="Botones">
+        <div class="btn-group mr-2" role="group" aria-label="Grupo Volver">
+            <a href="{{ path('app_reparaciones_index') }}" class="btn btn-primary">Volver</a>
+        </div>
+		{% if is_granted('ROLE_ADMIN') %}
+			<a href="{{ path('app_reparaciones_edit', {'id': reparacione.id}) }}" class="btn btn-success">Editar</a>
+		{% endif %}
+        <div class="btn-group ml-2" role="group" aria-label="Grupo Volver">
+            {{ include('reparaciones/_delete_form.html.twig') }}
+        </div>
+	</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Reparaciones{% endblock %}
+
+{% block body %}
+    <h1>Edit Reparaciones</h1>
+
+    {{ include('reparaciones/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_reparaciones_index') }}">Volver</a>
+
+   {{ include('reparaciones/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New PiezasIphone{% endblock %}
+
+{% block body %}
+    <h1>Create new PiezasIphone</h1>
+
+    {{ include('piezas_iphone/_form.html.twig') }}
+
+    <a href="{{ path('app_piezas_iphone_index') }}">back to list</a>
+{% endblock %}

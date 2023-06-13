@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+	<div class="container mx-auto">
+		<div class="container mx-auto text-bg p-2 rounded">
+			<h3 class="text-center">Alta de Usuario</h3>
+		</div>
+
+		{{ form_start(registrationForm) }}
+
+		<div class="card mx-auto" style="width: 38rem;">
+			<div class="card-body">
+				<h6 class="card-subtitle mb-2 text-body-secondary py-2">Nombre</h6>
+				<div class="form-group">
+					{{ form_widget(registrationForm.nombre, {'attr': {'class': 'form-control ' ~ (registrationForm.nombre.vars.errors|length > 0 ? 'is-invalid' : '')}}) }}
+					{% if registrationForm.nombre.vars.errors|length > 0 %}
+						<div class="invalid-feedback">
+							{{ registrationForm.nombre.vars.errors|first.message }}
+						</div>
+					{% endif %}
+				</div>
+
+				<h6 class="card-subtitle mb-2 text-body-secondary py-2">Apellidos</h6>
+				<div class="form-group">
+					{{ form_widget(registrationForm.apellidos, {'attr': {'class': 'form-control ' ~ (registrationForm.apellidos.vars.errors|length > 0 ? 'is-invalid' : '')}}) }}
+					{% if registrationForm.apellidos.vars.errors|length > 0 %}
+						<div class="invalid-feedback">
+							{{ registrationForm.apellidos.vars.errors|first.message }}
+						</div>
+					{% endif %}
+				</div>
+
+				<h6 class="card-subtitle mb-2 text-body-secondary py-2">Telefono</h6>
+				<div class="form-group">
+					{{ form_widget(registrationForm.telefono, {'attr': {'class': 'form-control ' ~ (registrationForm.telefono.vars.errors|length > 0 ? 'is-invalid' : '')}}) }}
+					{% if registrationForm.telefono.vars.errors|length > 0 %}
+						<div class="invalid-feedback">
+							{{ registrationForm.telefono.vars.errors|first.message }}
+						</div>
+					{% endif %}
+				</div>
+
+				<h6 class="card-subtitle mb-2 text-body-secondary py-2">Correo Electronico</h6>
+				<div class="form-group">
+					{{ form_widget(registrationForm.email, {'attr': {'class': 'form-control ' ~ (registrationForm.email.vars.errors|length > 0 ? 'is-invalid' : '')}}) }}
+					{% if registrationForm.email.vars.errors|length > 0 %}
+						<div class="invalid-feedback">
+							{{ registrationForm.email.vars.errors|first.message }}
+						</div>
+					{% endif %}
+				</div>
+
+				<h6 class="card-subtitle mb-2 text-body-secondary py-2">Contraseña</h6>
+				<div class="form-group">
+					{{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control ' ~ (registrationForm.plainPassword.vars.errors|length > 0 ? 'is-invalid' : '')}}) }}
+					{% if registrationForm.plainPassword.vars.errors|length > 0 %}
+						<div class="invalid-feedback">
+							{{ registrationForm.plainPassword.vars.errors|first.message }}
+						</div>
+					{% endif %}
+				</div>
+				<br/>
+				<button type="submit" class="btn btn-success btn-inline">Registrarse</button>
+			</div>
+		</div>
+		{{ form_end(registrationForm) }}
+	</div>
+{% endblock %}

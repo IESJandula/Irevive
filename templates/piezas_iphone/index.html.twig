@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Piezas de Iphone
+{% endblock %}
+
+{% block body %}
+	<h1>Piezas de Iphone</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Pieza</th>
+				<th>Precio</th>
+				<th>Cantidad</th>
+				<th>modelo</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<form action="{{ path('app_piezas_iphone_index') }}" method="get">
+				<label for="modelo">Modelo:</label>
+				<select id="modelo" name="modelo">
+					<option value="">Todos los modelos</option>
+					<option value="iPhone 8">iPhone 8</option>
+					<option value="iPhone 8 Plus">iPhone 8 Plus</option>
+					<option value="iPhone X">iPhone X</option>
+					<option value="iPhone XS">iPhone XS</option>
+					<option value="iPhone XS Max">iPhone XS Max</option>
+					<option value="iPhone 11">iPhone 11</option>
+					<option value="iPhone 11 Pro">iPhone 11 Pro</option>
+					<option value="iPhone 11 Pro Max">iPhone 11 Pro Max</option>
+                    <option value="iPhone 12 mini">iPhone 12 mini</option>
+                    <option value="iPhone 12">iPhone 12</option>
+					<option value="iPhone 12 Pro">iPhone 12 Pro</option>
+					<option value="iPhone 12 Pro Max">iPhone 12 Pro Max</option>
+                    <option value="iPhone 13 mini">iPhone 13 mini</option>
+                    <option value="iPhone 13">iPhone 13</option>
+					<option value="iPhone 13 Pro">iPhone 13 Pro</option>
+					<option value="iPhone 13 Pro Max">iPhone 13 Pro Max</option>
+				</select>
+			
+				<button type="submit" class="btn btn-dark">Filtrar</button>
+			</form>
+				<br/>
+			<a href="{{ path('app_piezas_iphone_new', {'modelo': app.request.query.get('modelo')}) }}" class="btn btn-info">Nueva pieza</a>
+			{% for piezas_iphone in piezas_iphones %}
+				{% if not app.request.query.get('modelo') or piezas_iphone.getModeloId().modelo == app.request.query.get('modelo') %}
+					<tr>
+						<td>{{ piezas_iphone.id }}</td>
+						<td>{{ piezas_iphone.pieza }}</td>
+						<td>{{ piezas_iphone.precio }}</td>
+						<td>{{ piezas_iphone.cantidad }}</td>
+						<td>{{ piezas_iphone.getModeloId().modelo }}</td>
+						<td>
+							<a href="{{ path('app_piezas_iphone_show', {'id': piezas_iphone.id}) }}">show</a>
+							<a href="{{ path('app_piezas_iphone_edit', {'id': piezas_iphone.id}) }}">edit</a>
+						</td>
+					</tr>
+				{% endif %}
+			{% else %}
+				<tr>
+					<td colspan="5">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_piezas_iphone_new', {'modelo': app.request.query.get('modelo')}) }}">Nueva pieza</a>
+
+{% endblock %}

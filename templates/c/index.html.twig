@@ -1,0 +1,117 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	{{ parent() }}
+
+	<section class="banner py-3 text-center">
+		<div class="jumbotron">
+			<h1 class="display-3">Reparación de teléfonos</h1>
+			<p class="lead">¿Tu teléfono está fallando? ¡No te preocupes! Nuestros expertos están aquí para ayudarte.</p>
+		</div>
+	</section>
+	<section class="servicios py-2">
+		<div class="container">
+			<h2 class="text-center mb-4">Nuestros servicios</h2>
+			<div class="row">
+				<div class="col-md-4 mb-4">
+					<div class="card h-100">
+						<img src="https://banco-imagenes-joel.s3.eu-west-3.amazonaws.com/pantallaRota.png" class="card-img-top" alt="Pantalla Rota">
+						<div class="card-body">
+							<h5 class="card-title">Reparación de Pantalla Rota</h5>
+							<p class="card-text">Reparación de Pantallas por Expertos. Confía en nuestro equipo altamente capacitado para solucionar cualquier problema con la pantalla de tu dispositivo. Ofrecemos un servicio rápido, preciso y duradero para restaurar la funcionalidad y la estética de tu pantalla. Recupera la claridad visual y la experiencia óptima en tus dispositivos con nuestra ayuda profesional.</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 mb-4">
+					<div class="card h-100">
+						<img src="https://banco-imagenes-joel.s3.eu-west-3.amazonaws.com/placa-base-original-para-iphone-6g-swap-defectuosa.webp" class="card-img-top" alt="Placa Rota">
+						<div class="card-body">
+							<h5 class="card-title">Reparación de Placa Base de Apple</h5>
+							<p class="card-text">Confía en nuestro equipo de expertos para la reparación de placas base de dispositivos Apple. Solucionamos eficientemente problemas de encendido, sobrecalentamiento, fallas de componentes y más. Utilizamos repuestos originales de alta calidad para garantizar un rendimiento óptimo. Nuestro compromiso es brindarte un servicio confiable y rápido, devolviendo la funcionalidad a tu dispositivo en poco tiempo. ¡No esperes más y contáctanos hoy mismo para recibir asistencia profesional en la reparación de tu placa base de Apple!</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 mb-4">
+					<div class="card h-100">
+						<img src="https://banco-imagenes-joel.s3.eu-west-3.amazonaws.com/reparar-cristal-objetivo-camara-iPhone-en-barcelona.webp" class="card-img-top" alt="Placa Rota">
+						<div class="card-body">
+							<h5 class="card-title">Reparación de Camara de Apple</h5>
+							<p class="card-text">Nuestro equipo especializado en reparación de cámaras de iPhone soluciona cualquier problema. Con herramientas de última generación y técnicas precisas, restauramos la funcionalidad óptima de tu cámara. Confía en nuestros expertos para recuperar el potencial fotográfico de tu iPhone.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="proximamente py-5">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<h2 class="text-secondary">PRÓXIMAMENTE</h2>
+					<p>¡Emocionantes novedades! Próximamente en nuestra página, estaremos introduciendo un nuevo servicio de alquiler de teléfonos iPhone. Ahora podrás disfrutar de la última tecnología de Apple sin tener que realizar una compra permanente. ¡Mantente atento para más información sobre cómo alquilar los últimos modelos de iPhone y experimentar todas sus increíbles características por ti mismo! Pronto podrás disfrutar de la comodidad y la flexibilidad de alquilar un iPhone para satisfacer tus necesidades. ¡Estamos ansiosos por ofrecerte esta opción de alquiler en nuestro sitio web y brindarte una experiencia móvil excepcionalmente conveniente!</p>
+				</div>
+				<div class="col-md-6">
+					<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+						<div class="carousel-inner">
+							<div class="carousel-item active text-center">
+								<img src="https://banco-imagenes-joel.s3.eu-west-3.amazonaws.com/iphone11.jpg" class="w-50" alt="iPhone 1">
+								<div class="carousel-caption">
+									<h3 class="text-info">IPHONE 11</h3>
+								</div>
+							</div>
+							<div class="carousel-item text-center">
+								<img src="https://banco-imagenes-joel.s3.eu-west-3.amazonaws.com/iphone13MINI.jpg" class="w-50" alt="iPhone 2">
+								<div class="carousel-caption">
+									<h3 class="text-info">IPHONE 13 MINI</h3>
+								</div>
+							</div>
+							<div class="carousel-item text-center">
+								<img src="https://banco-imagenes-joel.s3.eu-west-3.amazonaws.com/iphone13.jpg" class="w-50" alt="iPhone 3">
+								<div class="carousel-caption">
+									<h3 class="text-info">IPHONE 13</h3>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+
+<section class="cta py-5 text-center bg-secondary text-white">
+	<div class="container">
+		<h2 class="mb-4">¿Listo para reparar tu teléfono?</h2>
+		<a href="{{ path('app_reparaciones_new') }}" class="btn btn-light btn-lg">Solicita una reparación</a>
+	</div>
+</section>
+{% if app.session.flashBag.has('success') %}
+	<div class="toast-container position-fixed bottom-0 end-0 p-3">
+		<div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+			<div class="toast-header bg-primary">
+				<strong class="me-auto">Registro</strong>
+				<small class="text-muted">justo ahora</small>
+				<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+			</div>
+			<div class="toast-body">
+				{{ app.session.flashBag.get('success')[0] }}
+			</div>
+		</div>
+	</div>
+{% endif %}
+
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script>
+		var toastEl = document.getElementById('successToast');
+var toast = new bootstrap.Toast(toastEl);
+toast.show();
+	</script>
+{% endblock %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>{% endblock %}

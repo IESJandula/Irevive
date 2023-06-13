@@ -1,0 +1,140 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nueva Reparación
+{% endblock %}
+
+{% block body %}
+	<div class="container my-4">
+		<div class="row">
+			<div class="col-md-8 offset-md-2">
+				<h1 class="text-center mb-4">Nueva Reparación</h1>
+				{{ form_start(form) }}
+				<div class="form-group">
+					{{ form_label(form.descripcion, 'Descripción') }}
+					{{ form_widget(form.descripcion, {'attr': {'class': 'form-control'}}) }}
+				</div>
+				<div class="form-group">
+					{{ form_label(form.fecha, 'Fecha') }}
+					{{ form_widget(form.fecha, {'attr': {'class': 'form-control-sm'}}) }}
+				</div>
+				<div class="form-group" style="display:none;">
+					{{ form_label(form.usuario_id, 'Usuario') }}
+					{{ form_widget(form.usuario_id, {'attr': {'class': 'form-control'}}) }}
+				</div>
+				<div class="form-group" style="max-height: 15em">
+					{{ form_label(form.pieza_id, 'Piezas') }}
+					<select id="pieza-select" class="form-select  mb-3">
+						<option value="0" data-modelo="">Seleccione Modelo</option>
+						<option value="iPhone_SE_(2nd_generation)" data-modelo="iPhone_SE_(2nd_generation)">iPhone SE (2nd generation)</option>
+						<option value="Iphone_8" data-modelo="iPhone_8">IPhone 8</option>
+						<option value="Iphone_8_plus" data-modelo="iPhone_8_Plus">IPhone 8 Plus</option>
+						<option value="Iphone_X" data-modelo="iPhone_X">IPhone X</option>
+						<option value="iPhone_XR" data-modelo="iPhone_XR">IPhone XR</option>
+						<option value="iPhone_XS" data-modelo="iPhone_XS">IPhone XS</option>
+						<option value="iPhone_XS_Max" data-modelo="iPhone_XS_Max">IPhone XS Max</option>
+						<option value="iPhone_11" data-modelo="iPhone_11">IPhone 11</option>
+						<option value="iPhone_11_Pro" data-modelo="iPhone_11_Pro">IPhone 11 Pro</option>
+						<option value="iPhone_11_Pro_Max" data-modelo="iPhone_11_Pro_Max">IPhone 11 Pro Max</option>
+						<option value="iPhone_12_Mini" data-modelo="iPhone_12_mini">IPhone 12 Mini</option>
+						<option value="iPhone_12" data-modelo="iPhone_12">IPhone 12</option>
+						<option value="iPhone_12_Pro" data-modelo="iPhone_12_Pro">IPhone 12 Pro</option>
+						<option value="iPhone_12_Pro_Max" data-modelo="iPhone_12_Pro_Max">IPhone 12 Pro Max</option>
+						<option value="iPhone_13_Mini" data-modelo="iPhone_13_mini">IPhone 13 Mini</option>
+						<option value="iPhone_13" data-modelo="iPhone_13">IPhone 13</option>
+						<option value="iPhone_13_Pro" data-modelo="iPhone_13_Pro">IPhone 13 Pro</option>
+						<option value="iPhone_13_Pro_Max" data-modelo="iPhone_13_Pro_Max">IPhone 13 Pro Max</option>
+					</select>
+					<div class="form-control" style="max-height: 8em">
+						{% for choice in form.pieza_id %}
+							<div class="form-check-inline {{choice.vars.attr['data-modelo']}}" style="display:none;">
+								{{ form_widget(choice, {'attr': {'class': 'form-check-input checkbox-pieza', 'id': choice.vars.attr['dataPrecio']}}) }}
+								{{ form_label(choice, choice.vars.label, {'label_attr': {'class': 'form-check-label'}}) }}
+							</div>
+							<br>
+						{% endfor %}
+					</div>
+				</div>
+
+
+				<div class="form-group" style="margin-top: 40px;">
+					<button type="submit" class="btn btn-primary mt-3">Guardar</button>
+					<a href="{{ path('app_reparaciones_index') }}" class="btn btn-secondary mt-3">Cancelar</a>
+					<a href="{{ path('app_index') }}" class="btn btn-secondary mt-3">Regresar</a>
+					<h3 class="mt-1" style="float: right;">
+						Precio Total:
+						<span id="precio" class="display-6 text-primary">0</span>€
+					</h3>
+
+
+					{{ form_end(form) }}
+				</div>
+			</div>
+		</div>
+
+		<script>
+			// Obtén el precio total inicial
+let precioTotal = 0;
+
+// Obtiene el select y los divs de las piezas
+const select = document.getElementById('pieza-select');
+const piezaDivs = document.querySelectorAll('.form-check-inline');
+
+// Agrega un evento de cambio al select
+select.addEventListener('change', function () {
+const selectedOption = select.options[select.selectedIndex];
+const selectedModelo = selectedOption.getAttribute('data-modelo');
+
+// Deseleccionar todos los checkboxes
+checkboxes.forEach(function (checkbox) {
+checkbox.checked = false;
+});
+
+// Restablecer el precio total a cero
+precioTotal = 0;
+document.getElementById('precio').textContent = precioTotal;
+// Crea un array para almacenar los divs que coinciden con el modelo seleccionado
+const selectedDivs = [];
+
+// Recorre todos los divs de las piezas y ajusta la visibilidad según el modelo seleccionado
+piezaDivs.forEach(function (div) {
+if (div.classList.contains(selectedModelo)) {
+selectedDivs.push(div); // Agrega el div al array si coincide con el modelo seleccionado
+} else {
+div.style.display = 'none'; // Oculta el div si no coincide con el modelo seleccionado
+}
+});
+
+// Mueve los divs seleccionados al principio del contenedor
+selectedDivs.forEach(function (div) {
+div.style.display = ''; // Muestra el div
+div.parentNode.prepend(div); // Mueve el div al principio del contenedor
+});
+
+// Agrega un salto de línea después de cada div de pieza
+const container = document.querySelector('.form-control');
+container.innerHTML = ''; // Limpia el contenedor
+
+selectedDivs.forEach(function (div) {
+container.appendChild(div.cloneNode(true));
+let br = document.createElement('br');
+container.appendChild(br); // Agrega un salto de línea
+});
+});
+
+// Agrega un evento de cambio a todos los checkboxes
+const checkboxes = document.querySelectorAll('.checkbox-pieza');
+checkboxes.forEach(function (checkbox) {
+checkbox.addEventListener('change', function () {
+const precio = parseInt(checkbox.getAttribute('dataPrecio')); // Obtén el precio del checkbox seleccionado
+if (checkbox.checked) {
+precioTotal += precio; // Suma el precio si el checkbox está seleccionado
+} else {
+precioTotal -= precio; // Resta el precio si el checkbox se deselecciona
+}
+document.getElementById('precio').textContent = precioTotal; // Actualiza el precio total en el elemento HTML
+});
+});
+		</script>
+
+
+	{% endblock %}

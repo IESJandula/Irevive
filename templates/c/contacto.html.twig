@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<html lang="es">
+
+<head>
+  <!-- Incluimos los estilos de Bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <main>
+      <div class="row mt-5">
+        <div class="col-md-12 text-center">
+          <h1 class="text-primary">Reparaciones Rápidas de Teléfonos</h1>
+        </div>
+      </div>
+
+      <div class="row mt-5 justify-content-center">
+        <div class="col-md-12 text-center">
+          <h2>Nuestros Servicios</h2>
+        </div>
+        <div class="col-md-4">
+          <ul class="list-group-flush justify-content-center">
+            <li class="list-group-item">Reparación de pantalla</li>
+            <li class="list-group-item">Cambio de batería</li>
+            <li class="list-group-item">Reparación de cámaras</li>
+            <li class="list-group-item">Reparación de altavoces y micrófonos</li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <ul class="list-group-flush ">
+            <li class="list-group-item">Reparación de botones</li>
+            <li class="list-group-item">Reparación de placas base</li>
+            <li class="list-group-item">Cambio del modulo de almacenamiento</li>
+            <li class="list-group-item">Y más</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row mt-5 ">
+        <div class="col-md-12 text-center">
+          <h2>Contacto</h2>
+        </div>
+        <div class="col-md-6 offset-md-3">
+          <ul class="list-unstyled">
+            <li>Teléfono: <span class="text-primary">691523690</span></li>
+            <li>Correo electrónico: <span class="text-primary">almujoel40@gmail.com</span></li>
+          </ul>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Incluimos los scripts de Bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+{% endblock %}
